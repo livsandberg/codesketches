@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <title>Random image color</title>
+</head>
+<style>
+   
+    body{
+        text-align: center;
+    }
+    .circle{
+        position: absolute;
+        width: 85px;
+        height: 85px;
+        background-color: blue;
+        border-radius: 50px;
+
+    }
+  
+</style>
+  
+<body>
+
+    <h1>Move you mouse around the page!</h1>
+    <div class = "cirle"></div>
+
+      
+    <script>
+
+        document.addEventListener('mousemove', function makeCircle(event){
+        var circle = document.createElement('div');
+        circle.classList.add("circle");
+        circle.style.position = "absolute";
+        document.body.appendChild(circle);
+        circle.style.left = event.clientX - 45 + "px";
+        circle.style.top = event.clientY - 45 + "px";
+        circle.style.backgroundColor = 'rgba(' 
+       + randomcolor() + ',' + randomcolor()+ ',' + randomcolor() + '\)'
+        });
+        
+
+        function randomcolor() {
+            return Math.floor(Math.random() * 255);
+        }
+        
+    
+
+         </script>
+</body>
+  
+</html>
+
+	

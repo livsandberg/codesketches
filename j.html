@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <title></title>
+    <style type="text/css">
+   
+
+   #shoes{
+            width: 300px;
+            height: 300px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            background-position: center;
+            border-color: black;
+            border-width: 1px;
+        }
+    body{
+        font-family: 'Bebas Neue', cursive;
+        font-size: 25;
+        color: rgb(45, 255, 13);
+    }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>CLICK FOR ORGANIZATIONS!!!</h1>
+      <!--   <div id="word"></div> -->
+      <div id="shoes">
+                
+
+            </div>
+
+        <script type="text/javascript">
+        // var orgs = ["url(click.jpg)", "url(National.png.jpg)", "url(mj.png.jpg)"
+   
+
+        // var box = document.getElementById('word');
+     
+
+        // document.addEventListener("click", function showImage(event) {
+            // var pic = document.createElement('div');
+            // face.classList.add("face");
+
+
+            // var random = Math.floor(7*Math.random());
+            // console.log(orgs[random])
+     
+
+
+            // box.style.backgroundImage = orgs[random];
+
+  var images = [
+   "url(click.jpg)",
+    "url(timer.jpg)"
+];
+        // var box = document.getElementById('shoes');
+
+    document.addEventListener("click", function(){console.log()
+   var random = Math.round(Math.random()* images.length);
+console.log(images[random])
+
+    var face = document.createElement('div');
+    face.style.backgroundImage = images[random];
+    face.style.position = "absolute";
+    document.body.appendChild(face);
+    face.style.left = event.clientX - 45 + "px";
+    face.style.top = event.clientY - 45 + "px";
+    });
+            // box.style.backgroundImage = images[random];
+// face.style.left = event.clientX - 45 + "px";
+    // face.style.top = event.clientY - 45 + "px";
+    // });  
+
+
+
+    // document.addEventListener('click', function makeFace(event){
+    
+   
+ 
+            
+
+    // face.classList.add("face");
+    // face.style.position = "absolute";
+    // document.body.appendChild(face);
+    // face.style.left = event.clientX - 45 + "px";
+    // face.style.top = event.clientY - 45 + "px";
+    // });          
+    //     })
+
+
+
+        </script>
+    </center>
+</body>
+
+</html>
+
+        </script>
+    </center>
+</body>
+
+</html>

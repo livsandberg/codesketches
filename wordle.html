@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<style type="text/css">
+		/*.box {
+  
+  padding: 20px;
+  border: 2px solid black;
+  font-size: 150%;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(5, 50px);
+  grid-template-rows: repeat(5, 50px);
+  margin-left:575px;
+}
+
+#keyboard {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#keyboard-cont div {
+  display: flex;
+}
+
+.row2 {
+  margin: 0.5rem 0;
+}
+
+.keyboard-button {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem;
+  margin: 0 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+ body, html {
+  	background: #111;
+  	color: white;
+  	font-family: sans-serif;
+ 	text-align: center;
+ 	text-transform: uppercase;
+  }
+  h1 {
+  	font-size: 42px
+  }
+  .cell {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #aaa;
+    display: inline-block;
+    margin: 10px;
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+*/
+
+<style>
+  body, html {
+  	background: #111;
+  	color: white;
+  	font-family: sans-serif;
+ 	text-align: center;
+ 	text-transform: uppercase;
+  }
+  h1 {
+  	font-size: 42px
+  }
+  .cell {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #aaa;
+    display: inline-block;
+    margin: 10px;
+    font-size: 40px;
+    font-weight: bold;
+  }
+	</style>
+</head>
+
+
+<body>
+<h1>Wordle</h1>
+<div id="grid"></div>
+
+ <!-- <div id = "grid"></div>
+<div id="keyboard">
+        <div class="row1">
+            <button class="keyboard-button" value = "q">q</button>
+            <button class="keyboard-button" value = "w">w</button>
+            <button class="keyboard-button"value = "e">e</button>
+            <button class="keyboard-button" value = "t">t</button>
+            <button class="keyboard-button" value = "y">y</button>
+            <button class="keyboard-button" value = "u">u</button>
+            <button class="keyboard-button" value = "i">i</button>
+            <button class="keyboard-button" value = "o">o</button>
+            <button class="keyboard-button" value = "p">p</button>
+        </div>
+        <div class="row2">
+            <button class="keyboard-button" value = "a">a</button>
+            <button class="keyboard-button" value = "s">s</button>
+            <button class="keyboard-button" value = "d">d</button>
+            <button class="keyboard-button" value = "f">f</button>
+            <button class="keyboard-button" value = "g">g</button>
+            <button class="keyboard-button" value = "h">h</button>
+            <button class="keyboard-button" value = "j">j</button>
+            <button class="keyboard-button" value = "k">k</button>
+            <button class="keyboard-button" value = "l">l</button>
+        </div>
+        <div class="row3">
+            <button class="keyboard-button">Del</button>
+            <button class="keyboard-button" value = "z">z</button>
+            <button class="keyboard-button" value = "x">x</button>
+            <button class="keyboard-button" value = "c">c</button>
+            <button class="keyboard-button" value = "v">v</button>
+            <button class="keyboard-button" value = "b">b</button>
+            <button class="keyboard-button" value = "n">n</button>
+            <button class="keyboard-button" value = "m">m</button>
+            <button class="keyboard-button">Enter</button>
+        </div>
+    </div>
+
+ -->
+
+
+<script type="text/javascript">
+
+
+
+let wordList = [
+  'patio',
+  'darts',
+  'piano',
+  'horse',
+  'hello',
+  'water',
+  'pizza',
+  'sushi',
+  'crabs'
+];
+let randomIndex = Math.floor(Math.random() * wordList.length)
+let secret = wordList[randomIndex]
+
+let currentAttempt = ''
+let history = []
+
+let grid = document.getElementById('grid')
+buildGrid()
+updateGrid()
+window.addEventListener('keydown', handleKeyDown)
+
+function handleKeyDown(e) {
+  let letter = e.key.toLowerCase()
+  if (letter === 'enter') {
+    if (currentAttempt.length < 5) {
+      return
+    }
+    if (!wordList.includes(currentAttempt)) {
+      alert('Not in my thesaurus')
+      return
+    }
+    history.push(currentAttempt)
+    currentAttempt = ''
+  } else if (letter === 'backspace') {
+    currentAttempt = currentAttempt.slice(0, currentAttempt.length - 1)
+  } else if (/[a-z]/.test(letter)) {
+    if (currentAttempt.length < 5) {
+      currentAttempt += letter
+    }
+  }
+  updateGrid()
+}
+
+function buildGrid() {
+  for (let i = 0; i < 6; i++) {
+    let row = document.createElement('div')
+    for (let j = 0; j < 5; j++) {
+      let cell = document.createElement('div')
+      cell.className = 'cell'
+      cell.textContent = ''
+      row.appendChild(cell)
+    }
+    grid.appendChild(row)
+  }
+}
+
+
+function updateGrid() {
+  let row = grid.firstChild
+  for (let attempt of history) {
+    drawAttempt(row, attempt, false)
+    row = row.nextSibling
+  }
+  drawAttempt(row, currentAttempt, true)
+}
+
+function drawAttempt(row, attempt, isCurrent) {
+  for (let i = 0; i < 5; i++) {
+    let cell = row.children[i]
+    if (attempt[i] !== undefined) {
+      cell.textContent = attempt[i]
+    } else {
+      // lol
+      cell.innerHTML = '<div style="opacity: 0">X</div>'
+    }
+    if (isCurrent) {
+      cell.style.backgroundColor = '#111'
+    } else {
+      cell.style.backgroundColor = getBgColor(attempt, i)
+    }
+  }
+}
+
+function getBgColor(attempt, i) {
+  let correctLetter = secret[i]
+  let attemptLetter = attempt[i]
+  if (
+    attemptLetter === undefined ||
+    secret.indexOf(attemptLetter) === -1
+  ) {
+    return '#212121'
+  }
+  if (correctLetter === attemptLetter) {
+    return '#538d4e'
+  }
+  return '#b59f3b'
+}
+
+</script>
+</body>
+</html>

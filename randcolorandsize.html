@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    function setup() {
+  createCanvas(200, 200);
+  background(32);
+}
+
+function draw(){
+  var circleX = random(width);
+  var circleY = random(height);
+  var circleSize = random(10, 100);
+  fill(random(255), random(255), random(255));
+  
+  ellipse(circleX, circleY, circleSize)
+}
+</script>
+</body>
+</html>

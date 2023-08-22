@@ -1,0 +1,53 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Liv Sandberg</title>
+<style type="text/css">
+body{
+	text-align: center;
+}
+.face{
+	background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTTC0JYgC5Bg4axq9t7bcPDuQBdc5YAxeQQw&usqp=CAU);
+	background-size:contain;
+	background-repeat: no-repeat;
+	z-index: 2;
+	position: absolute;
+	
+	height: 100px;
+	width: 100px;
+}	
+#container{
+	background-color: white;
+	height: 20000px;
+	width: 100%;
+}
+
+
+</style>
+
+	
+</head>
+<body>
+
+
+
+
+
+<h1>Click around the page!</h1>
+<div id="no-background"></div>
+
+<script type="text/javascript">
+	document.addEventListener('click', function makeFace(event){
+	var face = document.createElement('div');
+	face.classList.add("face");
+	face.style.position = "absolute";
+	document.body.appendChild(face);
+	face.style.left = event.clientX - 45 + "px";
+	face.style.top = event.clientY - 45 + "px";
+	});
+</script>
+</body>
+

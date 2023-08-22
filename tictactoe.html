@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+
+	<style type="text/css">
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: hsla(40, 2%, 25%, 1);
+  background: url("../img/wood-texture.jpg") 50% 50%;
+  background-size: cover;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 30px 0;
+  margin: 0 auto;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* GAME CONTENT */
+
+.game-content {
+  position: relative;
+}
+
+/* NOTEBOOK */
+
+.notebook {
+  position: relative;
+}
+
+.notebook__img {
+  max-width: 100%;
+}
+
+.notebook__title {
+  position: absolute;
+  top: 33px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  font-family: "Permanent Marker", cursive;
+  font-size: 50px;
+  text-align: center;
+}
+
+/* WELCOME SECTION */
+
+.welcome-section {
+  position: absolute;
+  top: 114px;
+  left: 185px;
+  z-index: 3;
+  width: 400px;
+  height: 400px;
+}
+
+.choose-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.choose-player__btn,
+.restart-btn {
+  color: #41403e;
+  font-family: "Permanent Marker", cursive;
+  font-size: 18px;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+  background: transparent;
+  box-shadow: 20px 38px 34px -26px rgb(0 0 0 / 20%);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: 7px solid hsla(40, 2%, 25%, 1);
+  outline: none;
+  padding: 16px 16px;
+  margin: 0 16px;
+}
+
+.choose-player__btn:hover,
+.restart-btn:hover {
+  color: #fff;
+  background-color: #41403e;
+}
+
+.choose-player__btn span {
+  font-size: 28px;
+  line-height: 18px;
+}
+
+/* WINNER SECTION */
+
+.winner-section {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.winner-section__title {
+  font-family: "Permanent Marker", cursive;
+  font-size: 50px;
+  margin: 0 0 20px;
+}
+
+.restart-btn {
+  color: #41403e;
+  font-size: 25px;
+  letter-spacing: normal;
+  padding: 10px 16px;
+  margin: 0;
+  z-index: 3;
+}
+
+/* GRID */
+
+#grid {
+  position: absolute;
+  left: 185px;
+  top: 114px;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 400px;
+  height: 400px;
+  transform: skew(2deg, 1deg);
+  transition: opacity 0.2s;
+}
+
+.grid__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsla(40, 2%, 25%, 1);
+  font-family: "Permanent Marker", cursive;
+  font-size: 90px;
+  border: 1px solid hsla(225, 12%, 41%, 1);
+  cursor: url("../img/pencil_cursor.png"), default;
+}
+
+.grid__item:nth-child(-n + 3) {
+  border-top: none;
+}
+
+.grid__item:nth-child(n + 7) {
+  border-bottom: none;
+}
+
+.grid__item:first-child,
+.grid__item:nth-child(4),
+.grid__item:nth-child(7) {
+  border-left: none;
+}
+
+.grid__item:nth-child(3),
+.grid__item:nth-child(6),
+.grid__item:nth-child(9) {
+  border-right: none;
+}
+		/*.btn {
+            position: absolute;
+            width: 300px;
+            height: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }*/
+
+		/*body{
+		}*/
+/*
+		.grid-container{
+			justify-content: center;
+			display:grid;
+			grid-template-columns: 150px 150px 150px;
+			grid-template-rows: 150px 150px 150px;
+
+
+		}*/
+		/*
+		.box{
+			background-image:url('x.png')
+			background-size:contain;
+			background-repeat: no-repeat;
+			z-index: 2;
+			position: absolute;
+			
+			height: 100px;
+			width: 100px;
+		}	
+*/
+		/*.btn{ 
+			border:2px solid black;}*/
+			
+		/*}
+		.box{
+			background-image: url('x.png');
+			background-size:contain;
+			background-repeat: no-repeat;
+			z-index: 0;
+			
+		}*/
+	/*	#btn{
+			border:2px solid black;}
+
+	}
+*//*
+	.face{
+		background-image:url('x.png');
+		background-size:contain;
+		background-repeat: no-repeat;
+		z-index: 2;
+		position: absolute;
+	
+		height: 100px;
+		width: 100px;
+	}	*/
+
+
+
+
+
+	</style>
+</head>
+<body>
+
+	 <div class="container">
+        <div class="game-content">
+          <div class="notebook">
+            <div class="notebook__title">Tic Tac Toe</div>
+            <img class="notebook__img" src="img/notebook.png" alt="Notebook" />
+          </div>
+          <div class="welcome-section" id="welcome-section">
+            <div class="choose-player">
+              <button type="button" class="choose-player__btn">
+                Player <span>vs</span> Player
+              </button>
+            </div>
+          </div>
+          <div id="grid" class="hidden">
+            <div class="grid__item" id="0"></div>
+            <div class="grid__item" id="1"></div>
+            <div class="grid__item" id="2"></div>
+            <div class="grid__item" id="3"></div>
+            <div class="grid__item" id="4"></div>
+            <div class="grid__item" id="5"></div>
+            <div class="grid__item" id="6"></div>
+            <div class="grid__item" id="7"></div>
+            <div class="grid__item" id="8"></div>
+          </div>
+          <div class="winner-section hidden">
+            <h2 class="winner-section__title"></h2>
+            <button class="restart-btn">Restart</button>
+          </div>
+        </div>
+      </div>
+<!-- <div class = "grid-container">
+	<button class = "btn" id = "1"></button>
+	<button class = "btn" id = "2"></button>
+	<button class = "btn" id = "3"></button>
+	<button class = "btn" id = "4"></button>
+	<button class = "btn" id = "5"></button>
+	<button class = "btn" id = "6"></button>
+	<button class = "btn" id = "7"></button>
+	<button class = "btn" id = "8"></button>
+	<button  class = "btn" id = "9"></button>
+
+</div>
+
+ -->
+
+
+
+<!-- 	<div class = "grid-container">
+ --><!-- 		<div   id = "grid-box" >h</div>
+ -->		<!-- <button onClick="click()" id = "btn"></button>
+			<button  onclick="click()" id = "btn"></button>
+			<button  id = "btn"></button>
+			<button  id = "btn"></button>
+			<button  id = "btn"></button>
+			<button  id = "btn"></button>
+			<button  id = "btn"></button>
+			<button  id = "btn"></button> -->
+			
+
+		
+
+		<!-- <button onclick = "addTurn()" id = "grid-box"></button>
+		<button onclick = "addTurn()" id = "grid-box"></button>
+		<button onclick = "addTurn()" id = "grid-box"></button>
+		<button onclick = "addTurn()" id = "grid-box"></button>
+		<button onclick = "addTurn()" id = "grid-box"></button>
+		<button onclick = "addTurn()" id = "grid-box"></button> -->
+<!--      	<div   id = "grid-box" >h</div>
+ -->
+	
+
+
+ 
+	<script type="text/javascript">
+
+	const welcomeSection = document.getElementById('welcome-section')
+const winnerSection = document.querySelector('.winner-section')
+const winnerSectionTitle = document.querySelector('.winner-section__title')
+const choosePlayerBtn = document.querySelector('.choose-player__btn')
+// const player1Input = document.getElementById('player1-name')
+// const player2Input = document.getElementById('player2-name')
+const restartBtn = document.querySelector('.restart-btn')
+const grid = document.getElementById('grid')
+const gridItems = grid.querySelectorAll('.grid__item')
+
+let mark = 'X'
+const winCombos = [
+  [0, 1, 2],
+  [0, 3, 6],
+  [3, 4, 5],
+  [6, 7, 8],
+  [1, 4, 7],
+  [2, 4, 6],
+  [2, 5, 8],
+  [0, 4, 8]
+]
+// const board = [
+//   ['','',''],
+//   ['','',''],
+//   ['','','']
+// ]
+  welcomeSection.classList.add('hidden')
+  grid.classList.remove('hidden')
+  startGame();
+
+// const getColRowFromIndex = (arrLength, number) => {
+//   const row = number / arrLength
+//   const col = number % arrLength
+//   return {row, col}
+// }
+
+const startGame = () => {
+  grid.addEventListener('click', function(e){
+    let targetItem = e.target
+    if(targetItem.textContent === '') {
+      if(mark === 'X') {
+        targetItem.textContent = 'X'
+        targetItem.style.color = '#f1cd78'
+        if(checkWin(mark)) {
+          showResults(mark)
+        }
+        mark = 'O'
+      } else if(mark === 'O') {
+        targetItem.textContent = 'O'
+        targetItem.style.color = '#b82058'
+        if(checkWin(mark)) {
+          showResults(mark)
+        }
+        mark = 'X'
+      }
+    }
+    // const {row, col} = getColRowFromIndex(board.length, targetItem.id)
+    //   board[row][col] = targetItem.textContent
+    //   for (let i = 0; i < winCombos.length; i++) {
+    //     for (let j = 0; j < winCombos.length; j++) {
+    //       //  if(board[0][8] === winCombos[i][j]) {
+    //       //    grid.classList.add('hidden')
+    //       //  }
+    //     }
+    //   }
+  })
+}
+
+const checkWin = (currentMark) => {
+  return winCombos.some(combination => {
+    return combination.every(index => {
+      return gridItems[index].textContent.includes(currentMark)
+    })
+  })
+}
+
+
+     	//   btn = document.querySelector(".btn");
+        	// btn.addEventListener('click', function onClick() {
+        	// btn.classList.add('face')
+
+		// });
+
+  //       btn.forEach(btn,btn.addEventListener('click', function makeX(event){
+		// 	var x = document.createElement('div');
+		// 	x.classList.add('face');
+		// 	x.style.position = 'absolute';
+		// 	document.body.appendChild(x)
+		// 	x.style.left = event.clientX - 25 + "px";
+		// 	x.style.top = event.clientY - 25 + "px";
+		// });
+ 
+        
+
+		// document.addEventListener('click', function makeX(event){
+		// 	var x = document.createElement('div');
+		// 	x.classList.add('x');
+		// 	x.style.position = 'absolute';
+		// 	document.body.appendChild(x)
+		// 	x.style.left = event.clientX - 25 + "px";
+		// 	x.style.top = event.clientY - 25 + "px";
+		// });
+
+		// function addTurn(){
+		// 	// box = document.getElementsByClassName('grid-box');
+		// 	//  box.forEach(box=>box.addEventListener('click',function(element)){
+		// 	//  	element.classList.add('x')
+
+
+		// 	 }
+		
+			// let button = document.getElementsByTagName('button');
+		// const btn = document.querySelector('#btn');
+
+
+		// function click() {
+		// 	btn.addEventListener('click', function onClick() {
+		// 	});
+		// }
+		
+		
+		
+
+
+  //   button.addEventListener('click', function makeFace(event){
+		// var face = document.createElement('div');
+		// face.classList.add("face");
+		// face.style.position = "absolute";
+		// document.body.appendChild(face);
+		// face.style.left = event.clientX - 45 + "px";
+		// face.style.top = event.clientY - 45 + "px";
+		// });
+
+
+			// var x = document.createElement('div');
+			// x.style.position = 'absolute';
+			// document.body.appendChild(x)
+			// x.style.left = event.clientX - 25 + "px";
+			// x.style.top = event.clientY - 25 + "px";
+		
+			// document.body.style.backgroundColor = 'pink' ;
+		
+
+	</script>
+
+</body>
+</html>
+
+
+
+  
+    
